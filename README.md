@@ -27,7 +27,7 @@ The first dataset, `recipe`, contains _83782_ rows and _10_ columns, which conta
 | `description`   | User-provided description                                                                                                                                      |
 
 <br>
-The second dataset, `interactions`, contains user's interaction with the recipes, including the following information:
+The second dataset, `interactions`, contains *731927* rows and *5* columns. It includes user's interaction with the recipes, including the following information:
 
 | Column      | Description             |
 | ----------- | ----------------------- |
@@ -88,10 +88,33 @@ The first 3 rows of the cleaned dafaframe looks like this:
 
 ### Univariate Analysis
 
+The plot shows the distribution of number of ingredients for breakfast recipes. The distribution of ingredient counts in breakfast recipes mostly falls below 20. This indicates that breakfast recipes typically require fewer ingredients. This simplicity suggests that breakfast dishes often more simple, maybe people prefer to eat less during morning. 
+
 <iframe
-  src="assets/distribution_of_rating.html"
+  src="assets/ingredients_distribution.html"
   width="800"
   height="600"
   frameborder="0"
 ></iframe>
+
+### Bivariate Analysis
+
+Let's make some comparison for breakfast recipes and non-breakfast recipes. First, check their distribution of number of steps and see if it's different. As we can see, there are fewer breakfast recipes with more steps compared to non-breakfast recipes, suggesting that breakfast dishes often prioritize simplicity and efficiency in preparation. This trend reflects the preference for quick meal options in the morning. In contrast, non-breakfast recipes may involve more elaborate cooking processes, catering to different mealtime dynamics and culinary preferences throughout the day.
+
+
+<iframe
+  src="assets/n_steps.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+
+### Interesting Aggregates 
+For this section, I investigated the relationship between the breakfast and non-breakfast recipes with their nutrition facts. Breakfast recipes have lower means in all demensions of `calories`, `total_fat`,`sugar`, `sodium`, `protein`, `saturated_fat`, and `carbohydrates` compared to non-breakfast recipes. This suggests that breakfast recipes tend to be healthier and lighter in terms of these nutritional components. This finding aligns with dietary recommendations that emphasize consuming nutrient-dense and balanced meals to start the day on a healthy note.
+
+|                 | calories | carbohydrates | protein | saturated_fat | sodium | sugar | total_fat |
+|-----------------|----------|---------------|---------|---------------|--------|-------|-----------|
+| non-breakfast   | 433.74   | 13.82         | 33.75   | 40.56         | 29.58  | 69.18 | 32.97     |
+| breakfast       | 374.11   | 13.32         | 24.13   | 35.63         | 19.62  | 61.11 | 27.58     |
 
