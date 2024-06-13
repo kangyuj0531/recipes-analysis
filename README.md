@@ -92,8 +92,8 @@ The plot shows the distribution of number of ingredients for breakfast recipes. 
 
 <iframe
   src="assets/ingredients_distribution.html"
-  width="1200"
-  height="900"
+  width="1600"
+  height="1200"
   frameborder="0"
 ></iframe>
 
@@ -103,8 +103,8 @@ Let's make some comparison for breakfast recipes and non-breakfast recipes. Firs
 
 <iframe
   src="assets/n_steps.html"
-  width="1200"
-  height="900"
+  width="1600"
+  height="1200"
   frameborder="0"
 ></iframe>
 
@@ -145,13 +145,22 @@ The missingness of `mean_rating` is because of the `rating` column. I'll try to 
 
 **Significance Level**: 0.05
 
-Here's the distribution of steps for missing distriptions comparing to not missing discriptions:
+Here's the distribution of ingredients for missing distriptions comparing to not missing discriptions:
 
 <iframe
   src="assets/missingdist1.html"
-  width="1200"
-  height="900"
+  width="1600"
+  height="1200"
   frameborder="0"
 ></iframe>
 
-The recipes with descriptions are having a more normal distribution shape, and recipes without descriptions has a irregular shape, 
+The recipes with descriptions are having a more normal distribution shape on the number of ingredients, and recipes without descriptions has a more irregular shape, which might imply the missingness is not completely at random.
+
+Here's the distribution of absolute differences ingredients for missing distriptions comparing to not missing discriptions:
+
+<iframe
+  src="assets/missingtest1.html"
+  width="1600"
+  height="1200"
+  frameborder="0"
+></iframe>
