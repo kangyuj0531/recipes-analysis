@@ -264,3 +264,4 @@ Therefore, I decide to evaluate the **precision parity** of the model for the tw
 
 **Significance Level**: 0.05
 
+To run the permutation test, I split the dataframe into recipes that takes less or equal to 15 minutes and recipes that takes more than 15 minutes, and meaure their precision. And I do the same thing in the permutation test. 
