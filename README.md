@@ -92,8 +92,8 @@ The plot shows the distribution of number of ingredients for breakfast recipes. 
 
 <iframe
   src="assets/ingredients_distribution.html"
-  width="1600"
-  height="1200"
+  width="800"
+  height="600"
   frameborder="0"
 ></iframe>
 
@@ -103,8 +103,8 @@ Let's make some comparison for breakfast recipes and non-breakfast recipes. Firs
 
 <iframe
   src="assets/n_steps.html"
-  width="1600"
-  height="1200"
+  width="800"
+  height="600"
   frameborder="0"
 ></iframe>
 
@@ -130,7 +130,7 @@ Here's another plot focusing on the calories of the breakfast recipes vs. non-br
 There are significant missing values in `description`, `rating`, and `review` columns from the original dataframe. In which, `description` has 114 missing values, `rating` has 15036 missing values, and `review` has 58 missing values in the combined dataframe. 
 
 ### NMAR Analysis
-I believe that the `rating` column is not missing at random. Since the number of missing values in `rating` column is more than the number of missing values in `review` column, some people might just want to leave a review and do not want to rate the recipe. Maybe people have uncertainty in rating and just want to tell people what they think about the recipe.
+I believe that the missingness of the `rating` column is **NMAR**. Since the number of missing values in `rating` column is more than the number of missing values in `review` column, some people might just want to leave a review and do not want to rate the recipe. Maybe people have uncertainty in rating and just want to tell people what they think about the recipe.
 
 ### Missingness Dependency
 The missingness of `mean_rating` is because of the `rating` column. I'll try to investigate whether the missingness of description depends on the number of ingredients in the recipe or the day of week of the recipe.
@@ -149,8 +149,8 @@ Here's the distribution of ingredients for missing distriptions comparing to not
 
 <iframe
   src="assets/missingdist1.html"
-  width="1600"
-  height="1200"
+  width="800"
+  height="600"
   frameborder="0"
 ></iframe>
 
@@ -160,8 +160,8 @@ Here's the distribution of absolute differences of recipes' ingredients with mis
 
 <iframe
   src="assets/missingtest1.html"
-  width="1600"
-  height="1200"
+  width="800"
+  height="600"
   frameborder="0"
 ></iframe>
 
@@ -180,8 +180,8 @@ The p-value I got is 0.603, which is much larger than the significance level 0.0
 
 <iframe
   src="assets/missingdist1.html"
-  width="1600"
-  height="1200"
+  width="800"
+  height="600"
   frameborder="0"
 ></iframe>
 
@@ -191,8 +191,25 @@ Here's the distribution of absolute differences of recipes with missing distript
 
 <iframe
   src="assets/missingtest2.html"
-  width="1600"
-  height="1200"
+  width="800"
+  height="600"
   frameborder="0"
 ></iframe>
+
+## Hypothesis Testing
+
+In addition to the test above, I would like to explore more about whether breakfast recipes will have less calories. 
+I plan to run a *permutation test* on the following hypotheses, test statistic, and significance level:
+
+**Null Hypothesis**: Breakfast recipes have the same calories as other recipes.
+
+**Alternative Hypothesis**: Breakfast recipes have less calories than other recipes.
+
+**Test Statistic**: The difference in mean rating between breakfast recipes and other recipes.
+
+**Significance Level**: 0.05
+
+#### Conclusion
+
+The p-value I got is 0.007, which is lower than the significance level 0.05. Therefore, we reject the null hypothesis and in favor of the alternative hypothesis in the permutation test. The breakfast receipts seems to have less calories than other recipes.
 
