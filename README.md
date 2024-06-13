@@ -260,8 +260,8 @@ Therefore, I decide to evaluate the **precision parity** of the model for the tw
 
 **Alternative Hypothesis**: The model is not fair, preparing minutes that are less than or equal to 15 minutes and the preparing minutes are that are greater than 15 minutes are evaluated differently.
 
-**Test Statistic**: The difference in mean of their F1 score.
+**Test Statistic**: The absolute difference of their F1 score.
 
 **Significance Level**: 0.05
 
-To run the permutation test, I split the dataframe into recipes that takes less or equal to 15 minutes and recipes that takes more than 15 minutes, and meaure their precision. And I do the same thing in the permutation test. 
+To run the permutation test, I split the dataframe into recipes that takes less or equal to 15 minutes and recipes that takes more than 15 minutes, and meaure their precision. The observed difference of their precision is xx. I do the same thing after shuffling the `minutes` column. The p-value I got is xx, therefore, I fail to reject the null hypothesis. The model is fair for recipes with short time and recipes that takes longer time. 
