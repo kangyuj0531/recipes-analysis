@@ -217,8 +217,6 @@ I plan to run a *permutation test* on the following hypotheses, test statistic, 
   frameborder="0"
 ></iframe>
 
-#### Conclusion
-
 The p-value I got is 0.007, which is lower than the significance level 0.05. Therefore, we reject the null hypothesis and in favor of the alternative hypothesis in the permutation test. The breakfast recipes tend to have fewer calories than other recipes. This finding is consistent with people typically choosing lighter, more nutritious options at breakfast, possibly in an effort to start the day with a healthier meal. The observed differences in calorie content suggest that breakfast recipes are intentionally lower in calorie content to meet typical dietary preferences and nutritional considerations when consumed in the morning.
 
 ## Framing a Prediction Problem
@@ -264,4 +262,11 @@ Therefore, I decide to evaluate the **precision parity** of the model for the tw
 
 **Significance Level**: 0.05
 
-To run the permutation test, I split the dataframe into recipes that takes less or equal to 15 minutes and recipes that takes more than 15 minutes, and meaure their precision. The observed difference of their precision is xx. I do the same thing after shuffling the `minutes` column. The p-value I got is xx, therefore, I fail to reject the null hypothesis. The model is fair for recipes with short time and recipes that takes longer time. 
+<iframe
+  src="assets/fair.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+To run the permutation test, I split the dataframe into recipes that takes less or equal to 15 minutes and recipes that takes more than 15 minutes, and meaure their precision. The observed absolute difference of their precision is xx. I do the same thing after shuffling the `minutes` column. I performed 100 times for the permutation test due to the limit performance of my laptop. The observed absolute difference is about 0.0005. The p-value I got is 0.41. Therefore, I fail to reject the null hypothesis. The model is fair for recipes with short time and recipes that takes longer time. 
