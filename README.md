@@ -165,7 +165,7 @@ Here's the distribution of absolute differences of recipes' ingredients with mis
   frameborder="0"
 ></iframe>
 
-The p-value I got is 0.002, which is smaller than our significance level 0.05. Therefore, we reject the null hypothesis and in favor of the alternative hypothesis that the missingness of description depends on the 'n_ingredients' column.
+The observed statistics is about 1.133. The p-value I got is 0.002, which is smaller than our significance level 0.05. Therefore, we reject the null hypothesis and in favor of the alternative hypothesis that the missingness of description depends on the 'n_ingredients' column.
 
 > **Day of Week**
 **Null Hypothesis**: The distribution of day of week where the description are missing is the same as those descriptions are not missing.
@@ -175,8 +175,6 @@ The p-value I got is 0.002, which is smaller than our significance level 0.05. T
 **Test Statistic**: The absolute difference of mean in day of week between recipes with missing description and recipes without missing description.
 
 **Significance Level**: 0.05
-
-The p-value I got is 0.603, which is much larger than the significance level 0.05. Therefore, we keep the null hypothesis. The missingness of the description column does not depend on the day of week of the submission.
 
 <iframe
   src="assets/missingdist1.html"
@@ -196,9 +194,12 @@ Here's the distribution of absolute differences of recipes with missing distript
   frameborder="0"
 ></iframe>
 
+The observed statistics is about 0.0968. The p-value I got is 0.603, which is much larger than the significance level 0.05. Therefore, I **fail to reject the null hypothesis**. The missingness of the description column does not depend on the day of week of the submission.
+
+
 ## Hypothesis Testing
 
-In addition to the test above, I would like to explore more about whether breakfast recipes will have less calories. 
+I would like to explore more about whether breakfast recipes will have less calories since people tend to eat lighter at morning.
 I plan to run a *permutation test* on the following hypotheses, test statistic, and significance level:
 
 **Null Hypothesis**: Breakfast recipes have the same calories as other recipes.
@@ -209,7 +210,51 @@ I plan to run a *permutation test* on the following hypotheses, test statistic, 
 
 **Significance Level**: 0.05
 
+<iframe
+  src="assets/hypothesis.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
 #### Conclusion
 
-The p-value I got is 0.007, which is lower than the significance level 0.05. Therefore, we reject the null hypothesis and in favor of the alternative hypothesis in the permutation test. The breakfast receipts seems to have less calories than other recipes.
+The p-value I got is 0.007, which is lower than the significance level 0.05. Therefore, we reject the null hypothesis and in favor of the alternative hypothesis in the permutation test. The breakfast recipes tend to have fewer calories than other recipes. This finding is consistent with people typically choosing lighter, more nutritious options at breakfast, possibly in an effort to start the day with a healthier meal. The observed differences in calorie content suggest that breakfast recipes are intentionally lower in calorie content to meet typical dietary preferences and nutritional considerations when consumed in the morning.
+
+## Framing a Prediction Problem
+
+My model will try to **predict whether the recipe is a breakfast recipe** based on other variables in the dataset. This will be a binary classification since it's either a breakfast recipe or not breakfast recipe. 
+
+I use F1 score as the metric to evaluate my model because the data is not balances, there are much more recipes that are not breakfast in the data, if the model consistantly predict *False*, then the accuracy will be very high but it's not actually accurate. 
+
+At the time of prediction, we would know all the information about the recipe except whether it is a breakfast recipe, which is from the `tag` column of the dataframe.
+
+## Baseline Model
+
+I decide to use a **RandomForestClassifier** as my Baseline Model. I used `calories` and `minutes` as the primary predictors of my model, they are both quantitative variables. This choice was made by the simplicity of these variables and their relevance to breakfast recipes. 
+
+In this model, I used StandardScaler to standardize the features to make sure that they are in comparable range since the minutes and calories both have very excessive maximum values. The RandomForestClassifier can effectively segment the dataset based on these attributes utilizes their values to categorize recipes into breakfast and non-breakfast categories.
+
+The F1 score of the model is about 0.765, which is pretty fair. But there are still some improvement space.
+
+## Final Model
+As we saw the previous EDA, the `minutes`, `n_steps`, `n_ingredients` and the nutrition facts of the receipts are highly related to whether the recipe is breakfast. However we should not use all of them because some of them might not be very representative. <br>
+Therefore, I choose to use `calories`, `sodium`, `saturated_fat`, and `minutes` as the features to predict whether it is a breakfast recipe. <br>
+As I mentioned above, I used StandardScaler to standardize the features to make sure that they are in comparable range. I used RobustScaler for `sodium` and `saturated_fat` columns because have significant outliers, which migh effect the efficienty of the model.
+
+Since the GridSearchCV takes forever on my laptop, I decide to find the best hyperparameter manually. As shown in the plot, the best parameter might be around 20. Beyond this point, the train F1 score consistently remains at 1, suggesting a potential issue with overfitting.
+
+## Fairness Analysis
+
+For the fairness analysis, I want to compare the groups that the preparing minutes are less than or equal to 15 minutes and the preparing minutes are that are greater than 15 minutes. Since the morning time is very short, recipes that require less than 15 minutes to prepare are typically perceived as quicker options suitable for breakfast, due to the limited time available during morning hours. However, falsely categorizing time-consuming recipes as breakfast options could potentially disrupt this efficiency, leading people to invest more morning time than expected. 
+
+Therefore, I decide to evaluate the **precision parity** of the model for the two groups because the false evaluation of breakfast may lead people to waste time in the morning.
+
+**Null Hypothesis**: The model is fair, preparing minutes that are less than or equal to 15 minutes and the preparing minutes are that are greater than 15 minutes are evaluated the same.
+
+**Alternative Hypothesis**: The model is not fair, preparing minutes that are less than or equal to 15 minutes and the preparing minutes are that are greater than 15 minutes are evaluated differently.
+
+**Test Statistic**: The difference in mean of their F1 score.
+
+**Significance Level**: 0.05
 
