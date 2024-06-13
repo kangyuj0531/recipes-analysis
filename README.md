@@ -1,6 +1,6 @@
 # Statistical Analysis of Breakfast Recipes 
 
-This is a data science project for DSC 80 at UCSD. 
+This is a data science project for DSC 80 at UCSD. <br>
 Author: Yujie Kang
 
 ## Introduction
@@ -92,8 +92,8 @@ The plot shows the distribution of number of ingredients for breakfast recipes. 
 
 <iframe
   src="assets/ingredients_distribution.html"
-  width="800"
-  height="600"
+  width="1200"
+  height="900"
   frameborder="0"
 ></iframe>
 
@@ -101,11 +101,10 @@ The plot shows the distribution of number of ingredients for breakfast recipes. 
 
 Let's make some comparison for breakfast recipes and non-breakfast recipes. First, check their distribution of number of steps and see if it's different. As we can see, there are fewer breakfast recipes with more steps compared to non-breakfast recipes, suggesting that breakfast dishes often prioritize simplicity and efficiency in preparation. This trend reflects the preference for quick meal options in the morning. In contrast, non-breakfast recipes may involve more elaborate cooking processes, catering to different mealtime dynamics and culinary preferences throughout the day.
 
-
 <iframe
   src="assets/n_steps.html"
-  width="800"
-  height="600"
+  width="1200"
+  height="900"
   frameborder="0"
 ></iframe>
 
@@ -118,3 +117,41 @@ For this section, I investigated the relationship between the breakfast and non-
 | non-breakfast   | 433.74   | 13.82         | 33.75   | 40.56         | 29.58  | 69.18 | 32.97     |
 | breakfast       | 374.11   | 13.32         | 24.13   | 35.63         | 19.62  | 61.11 | 27.58     |
 
+<br>
+Here's another plot focusing on the calories of the breakfast recipes vs. non-breakfast recipes. While both breakfast and non-breakfast recipes have varying calorie counts, non-breakfast recipes tend to exhibit higher average and maximum calorie values. And there is a strange calorie of 0 in the non-breakfast recipes. 
+
+|             | mean   | median | min | max   | std    |
+|-------------|--------|--------|-----|-------|--------|
+| non-breakfast       | 433.74 | 307.1  | 0.0 | 45609.0| 645.40 |
+| breakfast        | 374.11 | 285.5  | 0.9 | 22371.2| 487.37 |
+
+## Assessment of Missingness
+
+There are significant missing values in `description`, `rating`, and `review` columns from the original dataframe. In which, `description` has 114 missing values, `rating` has 15036 missing values, and `review` has 58 missing values in the combined dataframe. 
+
+### NMAR Analysis
+I believe that the `rating` column is not missing at random. Since the number of missing values in `rating` column is more than the number of missing values in `review` column, some people might just want to leave a review and do not want to rate the recipe. Maybe people have uncertainty in rating and just want to tell people what they think about the recipe.
+
+### Missingness Dependency
+The missingness of `mean_rating` is because of the `rating` column. I'll try to investigate whether the missingness of description depends on the number of ingredients in the recipe or the day of week of the recipe.
+
+> **Number of Ingredients**
+
+**Null Hypothesis**: The distribution of number of ingredients where the description is missing is the same as the distribution of number of ingredients when the description is not missing.
+
+**Alternate Hypothesis**: The distribution of number of ingredients where the description is missing is different from the distribution of number of ingredients when the description is not missing.
+
+**Test Statistic**: The absolute difference of mean in number of ingredients between recipes with missing description and recipes without missing description.
+
+**Significance Level**: 0.05
+
+Here's the distribution of steps for missing distriptions comparing to not missing discriptions:
+
+<iframe
+  src="assets/missingdist1.html"
+  width="1200"
+  height="900"
+  frameborder="0"
+></iframe>
+
+The recipes with descriptions are having a more normal distribution shape, and recipes without descriptions has a irregular shape, 
