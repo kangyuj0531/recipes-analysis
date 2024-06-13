@@ -238,11 +238,17 @@ In this model, I used StandardScaler to standardize the features to make sure th
 The F1 score of the model is about 0.765, which is pretty fair. But there are still some improvement space.
 
 ## Final Model
-As we saw the previous EDA, the `minutes`, `n_steps`, `n_ingredients` and the nutrition facts of the receipts are highly related to whether the recipe is breakfast. However we should not use all of them because some of them might not be very representative. <br>
-Therefore, I choose to use `calories`, `sodium`, `saturated_fat`, and `minutes` as the features to predict whether it is a breakfast recipe. <br>
-As I mentioned above, I used StandardScaler to standardize the features to make sure that they are in comparable range. I used RobustScaler for `sodium` and `saturated_fat` columns because have significant outliers, which migh effect the efficienty of the model.
+As we saw the previous EDA, the `minutes`, `n_steps`, `n_ingredients` and the nutrition facts of the receipts are highly related to whether the recipe is breakfast. However we should not use all of them because some of them might not be very representative. 
+
+Therefore, I choose to use `calories`, `sodium`, `saturated_fat`, and `minutes` as the features to predict whether it is a breakfast recipe. They are all quantitative continuous variables. I still keep **RandomForestClassifier** as my Final Model.
+
+As I mentioned above, I used StandardScaler to standardize the features to make sure that they are in comparable range. I used RobustScaler for `sodium` and `saturated_fat` columns because they have significant outliers, which migh effect the efficienty of the model.
 
 Since the GridSearchCV takes forever on my laptop, I decide to find the best hyperparameter manually. As shown in the plot, the best parameter might be around 20. Beyond this point, the train F1 score consistently remains at 1, suggesting a potential issue with overfitting.
+
+![Model](assets/model.png "Model")
+
+I got F1 score about 0.96 in the final model. Which means the model can predict most recipes correctly.
 
 ## Fairness Analysis
 
