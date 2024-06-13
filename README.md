@@ -149,8 +149,8 @@ Here's the distribution of ingredients for missing distriptions comparing to not
 
 <iframe
   src="assets/missingdist1.html"
-  width="2000"
-  height="1500"
+  width="1600"
+  height="1200"
   frameborder="0"
 ></iframe>
 
@@ -195,3 +195,4 @@ Here's the distribution of absolute differences of recipes with missing distript
   height="1200"
   frameborder="0"
 ></iframe>
+
