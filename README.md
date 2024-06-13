@@ -149,17 +149,48 @@ Here's the distribution of ingredients for missing distriptions comparing to not
 
 <iframe
   src="assets/missingdist1.html"
-  width="1600"
-  height="1200"
+  width="2000"
+  height="1500"
   frameborder="0"
 ></iframe>
 
 The recipes with descriptions are having a more normal distribution shape on the number of ingredients, and recipes without descriptions has a more irregular shape, which might imply the missingness is not completely at random.
 
-Here's the distribution of absolute differences ingredients for missing distriptions comparing to not missing discriptions:
+Here's the distribution of absolute differences of recipes' ingredients with missing distriptions comparing to recipes without missing discriptions:
 
 <iframe
   src="assets/missingtest1.html"
+  width="1600"
+  height="1200"
+  frameborder="0"
+></iframe>
+
+The p-value I got is 0.002, which is smaller than our significance level 0.05. Therefore, we reject the null hypothesis and in favor of the alternative hypothesis that the missingness of description depends on the 'n_ingredients' column.
+
+> **Day of Week**
+**Null Hypothesis**: The distribution of day of week where the description are missing is the same as those descriptions are not missing.
+
+**Alternate Hypothesis**:The distribution of day of week where the description are missing are different from those descriptions are not missing.
+
+**Test Statistic**: The absolute difference of mean in day of week between recipes with missing description and recipes without missing description.
+
+**Significance Level**: 0.05
+
+The p-value I got is 0.603, which is much larger than the significance level 0.05. Therefore, we keep the null hypothesis. The missingness of the description column does not depend on the day of week of the submission.
+
+<iframe
+  src="assets/missingdist1.html"
+  width="1600"
+  height="1200"
+  frameborder="0"
+></iframe>
+
+Most recipes with missing description submitted on Thursday, maybe it's a busy day for people. 
+
+Here's the distribution of absolute differences of recipes with missing distriptions comparing to recipes missing discriptions:
+
+<iframe
+  src="assets/missingtest2.html"
   width="1600"
   height="1200"
   frameborder="0"
